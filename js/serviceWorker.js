@@ -29,14 +29,14 @@ self.addEventListener('fetch', event => {
 });
 
 self.addEventListener('push', function(event) {
-    const data = event.data.json();
+    const data = event.data ? event.data.json() : {};
     const options = {
-        body: data.body,
+        body: data.body || 'Default body',
         icon: '/icons/icon-192x192.png',
         badge: '/icons/icon-192x192.png'
     };
     event.waitUntil(
-        self.registration.showNotification(data.title, options)
+        self.registration.showNotification(data.title || 'Default title', options)
     );
 });
 
