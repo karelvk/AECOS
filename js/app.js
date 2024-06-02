@@ -59,11 +59,15 @@ function scheduleNotification() {
     // Schedule a notification 10 seconds after the app is first used
     setTimeout(() => {
         if ('Notification' in window && navigator.serviceWorker) {
-            window.registration.showNotification('Time to check your questionnaire responses!', {
-                body: 'Please review the responses you have collected.',
-                icon: '/AECOS/icons/icon-192x192.png'
+            navigator.serviceWorker.ready.then(function(registration) {
+                registration.showNotification('Time to check your questionnaire responses!', {
+                    body: 'Please review the responses you have collected.',
+                    icon: '/AECOS/icons/icon-192x192.png'
+                }).catch(error => {
+                    console.error('Error showing notification:', error);
+                });
             }).catch(error => {
-                console.error('Error showing notification:', error);
+                console.error('Service worker not ready:', error);
             });
         }
     }, 10000); // 10000ms = 10 seconds
