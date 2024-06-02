@@ -6,7 +6,7 @@ setTimeout(() => {
                 navigator.serviceWorker.getRegistration().then(reg => {
                     reg.showNotification('Time to check your questionnaire responses!', {
                         body: 'Please review the responses you have collected.',
-                        icon: '/icons/icon-192x192.png'
+                        icon: '/AECOS/icons/icon-192x192.png'
                     });
                 });
             }
@@ -27,7 +27,7 @@ if (timeUntilNotification > 0) {
                     navigator.serviceWorker.getRegistration().then(reg => {
                         reg.showNotification('Time to check your questionnaire responses!', {
                             body: 'Please review the responses you have collected.',
-                            icon: '/icons/icon-192x192.png'
+                            icon: '/AECOS/icons/icon-192x192.png'
                         });
                     });
                 }
