@@ -1,7 +1,7 @@
 {
     "name": "AECOS Questionnaire",
     "short_name": "AECOS",
-    "start_url": ".",
+    "start_url": "/",
     "display": "standalone",
     "background_color": "#ffffff",
     "theme_color": "#3e4eb8",
@@ -16,6 +16,7 @@
         "sizes": "512x512",
         "type": "image/png"
       }
-    ]
+    ],
+    "id": "/"
   }
   
