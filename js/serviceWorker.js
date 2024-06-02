@@ -32,21 +32,25 @@ self.addEventListener('fetch', event => {
 });
 
 self.addEventListener('push', function(event) {
-    const data = event.data ? event.data.json() : {};
+    const data = event.data ? event.data.json() : { title: 'Default title', body: 'Default body' };
     const options = {
-        body: data.body || 'Default body',
+        body: data.body,
         icon: '/AECOS/icons/icon-192x192.png',
         badge: '/AECOS/icons/icon-192x192.png'
     };
     event.waitUntil(
-        self.registration.showNotification(data.title || 'Default title', options)
+        self.registration.showNotification(data.title, options).catch(error => {
+            console.error('Error showing notification:', error);
+        })
     );
 });
 
 self.addEventListener('notificationclick', function(event) {
     event.notification.close();
     event.waitUntil(
-        clients.openWindow('/AECOS/')
+        clients.openWindow('/AECOS/').catch(error => {
+            console.error('Error opening window:', error);
+        })
     );
 });
 
@@ -59,6 +63,9 @@ self.addEventListener('message', function(event) {
             icon: '/AECOS/icons/icon-192x192.png',
             badge: '/AECOS/icons/icon-192x192.png'
         };
-        self.registration.showNotification(data.title, options);
+        self.registration.showNotification(data.title, options).catch(error => {
+            console.error('Error showing notification:', error);
+        });
     }
 });
+
