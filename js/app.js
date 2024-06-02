@@ -12,9 +12,12 @@ document.getElementById('questionnaire').addEventListener('submit', function(eve
         Notification.requestPermission().then(permission => {
             if (permission === 'granted') {
                 console.log('Notification permission granted.');
+                scheduleNotification();
             } else {
                 console.log('Notification permission denied.');
             }
+        }).catch(error => {
+            console.error('Notification permission request failed:', error);
         });
     }
 });
@@ -36,27 +39,29 @@ window.addEventListener('beforeinstallprompt', (e) => {
 });
 
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/js/serviceWorker.js')
+    navigator.serviceWorker.register('/AECOS/js/serviceWorker.js')
     .then(function(registration) {
         console.log('Service Worker registered with scope:', registration.scope);
-
-        // Handle push notifications
-        document.getElementById('questionnaire').addEventListener('submit', function() {
-            scheduleNotification(registration);
-        });
+        window.registration = registration; // Save registration for later use
     })
     .catch(function(error) {
         console.log('Service Worker registration failed:', error);
     });
 }
 
-function scheduleNotification(registration) {
+function scheduleNotification() {
+    // Ensure service worker registration is available
+    if (!window.registration) {
+        console.error('Service worker registration not found.');
+        return;
+    }
+
     // Schedule a notification 10 seconds after the app is first used
     setTimeout(() => {
         if ('Notification' in window && navigator.serviceWorker) {
-            registration.showNotification('Time to check your questionnaire responses!', {
+            window.registration.showNotification('Time to check your questionnaire responses!', {
                 body: 'Please review the responses you have collected.',
-                icon: '/icons/icon-192x192.png'
+                icon: '/AECOS/icons/icon-192x192.png'
             }).catch(error => {
                 console.error('Error showing notification:', error);
             });
@@ -71,9 +76,9 @@ function scheduleNotification(registration) {
     if (timeUntilNotification > 0) {
         setTimeout(() => {
             if ('Notification' in window && navigator.serviceWorker) {
-                registration.showNotification('Time to check your questionnaire responses!', {
+                window.registration.showNotification('Time to check your questionnaire responses!', {
                     body: 'Please review the responses you have collected.',
-                    icon: '/icons/icon-192x192.png'
+                    icon: '/AECOS/icons/icon-192x192.png'
                 }).catch(error => {
                     console.error('Error showing notification:', error);
                 });

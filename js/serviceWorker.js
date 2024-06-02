@@ -1,13 +1,13 @@
 const CACHE_NAME = 'aecos-questionnaire-cache-v1';
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/css/styles.css',
-    '/js/app.js',
-    '/js/notification.js',
-    '/manifest.json',
-    '/icons/icon-192x192.png',
-    '/icons/icon-512x512.png'
+    '/AECOS/',
+    '/AECOS/index.html',
+    '/AECOS/css/styles.css',
+    '/AECOS/js/app.js',
+    '/AECOS/js/notification.js',
+    '/AECOS/manifest.json',
+    '/AECOS/icons/icon-192x192.png', // Add your icons here
+    '/AECOS/icons/icon-512x512.png'
 ];
 
 self.addEventListener('install', event => {
@@ -15,6 +15,9 @@ self.addEventListener('install', event => {
         caches.open(CACHE_NAME)
             .then(cache => {
                 return cache.addAll(urlsToCache);
+            })
+            .catch(error => {
+                console.error('Failed to cache assets:', error);
             })
     );
 });
@@ -32,8 +35,8 @@ self.addEventListener('push', function(event) {
     const data = event.data ? event.data.json() : {};
     const options = {
         body: data.body || 'Default body',
-        icon: '/icons/icon-192x192.png',
-        badge: '/icons/icon-192x192.png'
+        icon: '/AECOS/icons/icon-192x192.png',
+        badge: '/AECOS/icons/icon-192x192.png'
     };
     event.waitUntil(
         self.registration.showNotification(data.title || 'Default title', options)
@@ -43,6 +46,6 @@ self.addEventListener('push', function(event) {
 self.addEventListener('notificationclick', function(event) {
     event.notification.close();
     event.waitUntil(
-        clients.openWindow('/')
+        clients.openWindow('/AECOS/')
     );
 });
