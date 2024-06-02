@@ -49,3 +49,16 @@ self.addEventListener('notificationclick', function(event) {
         clients.openWindow('/AECOS/')
     );
 });
+
+// Add a listener for messages to simulate a push notification
+self.addEventListener('message', function(event) {
+    if (event.data && event.data.action === 'push') {
+        const data = event.data.data;
+        const options = {
+            body: data.body,
+            icon: '/AECOS/icons/icon-192x192.png',
+            badge: '/AECOS/icons/icon-192x192.png'
+        };
+        self.registration.showNotification(data.title, options);
+    }
+});
