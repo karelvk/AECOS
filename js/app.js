@@ -67,22 +67,4 @@ function scheduleNotification() {
             });
         }
     }, 10000); // 10000ms = 10 seconds
-
-    // Alternatively, schedule a notification at a fixed time
-    const fixedTime = new Date('2024-06-03T10:30:00');
-    const now = new Date();
-    const timeUntilNotification = fixedTime - now;
-
-    if (timeUntilNotification > 0) {
-        setTimeout(() => {
-            if ('Notification' in window && navigator.serviceWorker) {
-                window.registration.showNotification('Time to check your questionnaire responses!', {
-                    body: 'Please review the responses you have collected.',
-                    icon: '/AECOS/icons/icon-192x192.png'
-                }).catch(error => {
-                    console.error('Error showing notification:', error);
-                });
-            }
-        }, timeUntilNotification);
-    }
 }
