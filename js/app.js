@@ -34,7 +34,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 });
 
 if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/serviceWorker.js')
+    navigator.serviceWorker.register('/js/serviceWorker.js')
     .then(function(registration) {
         console.log('Service Worker registered with scope:', registration.scope);
     })
