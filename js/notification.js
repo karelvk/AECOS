@@ -12,7 +12,7 @@ setTimeout(() => {
             }
         });
     }
-}, 600000); // 600000ms = 10 minutes
+}, 10000); // 600000ms = 10 minutes
 
 // Alternatively, schedule a notification at a fixed time
 const fixedTime = new Date('2024-06-03T10:30:00');
