@@ -5,7 +5,9 @@ const urlsToCache = [
     '/css/styles.css',
     '/js/app.js',
     '/js/notification.js',
-    '/manifest.json'
+    '/manifest.json',
+    '/icons/icon-192x192.png', // Add your icons here
+    '/icons/icon-512x512.png'
 ];
 
 self.addEventListener('install', event => {
@@ -23,5 +25,24 @@ self.addEventListener('fetch', event => {
             .then(response => {
                 return response || fetch(event.request);
             })
+    );
+});
+
+self.addEventListener('push', function(event) {
+    const data = event.data.json();
+    const options = {
+        body: data.body,
+        icon: '/icons/icon-192x192.png',
+        badge: '/icons/icon-192x192.png'
+    };
+    event.waitUntil(
+        self.registration.showNotification(data.title, options)
+    );
+});
+
+self.addEventListener('notificationclick', function(event) {
+    event.notification.close();
+    event.waitUntil(
+        clients.openWindow('/')
     );
 });

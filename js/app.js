@@ -6,6 +6,15 @@ document.getElementById('questionnaire').addEventListener('submit', function(eve
     
     localStorage.setItem('questionnaireData', JSON.stringify(formData));
     alert('Your response has been saved!');
+
+    // Request Notification Permission
+    if ('Notification' in window && navigator.serviceWorker) {
+        Notification.requestPermission().then(permission => {
+            if (permission === 'granted') {
+                console.log('Notification permission granted.');
+            }
+        });
+    }
 });
 
 window.addEventListener('beforeinstallprompt', (e) => {
@@ -23,3 +32,13 @@ window.addEventListener('beforeinstallprompt', (e) => {
         });
     });
 });
+
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/serviceWorker.js')
+    .then(function(registration) {
+        console.log('Service Worker registered with scope:', registration.scope);
+    })
+    .catch(function(error) {
+        console.log('Service Worker registration failed:', error);
+    });
+}

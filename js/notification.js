@@ -1,4 +1,4 @@
-// Schedule a notification 10 minutes after the app is first used
+// Schedule a notification 10 seconds after the app is first used
 setTimeout(() => {
     if ('Notification' in window && navigator.serviceWorker) {
         Notification.requestPermission().then(permission => {
@@ -6,13 +6,13 @@ setTimeout(() => {
                 navigator.serviceWorker.getRegistration().then(reg => {
                     reg.showNotification('Time to check your questionnaire responses!', {
                         body: 'Please review the responses you have collected.',
-                        icon: '/path/to/icon.png'
+                        icon: '/icons/icon-192x192.png'
                     });
                 });
             }
         });
     }
-}, 10000); // 600000ms = 10 minutes
+}, 10000); // 10000ms = 10 seconds
 
 // Alternatively, schedule a notification at a fixed time
 const fixedTime = new Date('2024-06-03T10:30:00');
@@ -27,7 +27,7 @@ if (timeUntilNotification > 0) {
                     navigator.serviceWorker.getRegistration().then(reg => {
                         reg.showNotification('Time to check your questionnaire responses!', {
                             body: 'Please review the responses you have collected.',
-                            icon: '/path/to/icon.png'
+                            icon: '/icons/icon-192x192.png'
                         });
                     });
                 }
