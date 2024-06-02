@@ -6,7 +6,7 @@ const urlsToCache = [
     '/js/app.js',
     '/js/notification.js',
     '/manifest.json',
-    '/icons/icon-192x192.png', // Add your icons here
+    '/icons/icon-192x192.png',
     '/icons/icon-512x512.png'
 ];
 
