@@ -6,7 +6,7 @@ const urlsToCache = [
     '/AECOS/js/app.js',
     '/AECOS/js/notification.js',
     '/AECOS/manifest.json',
-    '/AECOS/icons/icon-192x192.png', // Add your icons here
+    '/AECOS/icons/icon-192x192.png',
     '/AECOS/icons/icon-512x512.png'
 ];
 
@@ -54,7 +54,6 @@ self.addEventListener('notificationclick', function(event) {
     );
 });
 
-// Add a listener for messages to simulate a push notification
 self.addEventListener('message', function(event) {
     if (event.data && event.data.action === 'push') {
         const data = event.data.data;
@@ -68,4 +67,3 @@ self.addEventListener('message', function(event) {
         });
     }
 });
-

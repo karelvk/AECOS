@@ -25,11 +25,6 @@ document.getElementById('questionnaire').addEventListener('submit', function(eve
 });
 
 function scheduleNotification() {
-    if (!window.registration) {
-        console.error('Service worker registration not found.');
-        return;
-    }
-
     setTimeout(() => {
         if ('Notification' in window && navigator.serviceWorker) {
             navigator.serviceWorker.ready.then(function(registration) {
