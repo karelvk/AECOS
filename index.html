@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AECOS Questionnaire</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <h1>Patient Communication Questionnaire</h1>
+    <form id="questionnaire">
+        <h2>General Interest</h2>
+        <p>Are you interested in using a digital app for communication with your patients?</p>
+        <input type="radio" id="interestYes" name="interest" value="yes"> Yes
+        <input type="radio" id="interestNo" name="interest" value="no"> No
+
+        <!-- Add other sections of the questionnaire similarly -->
+
+        <h2>Additional Comments</h2>
+        <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="installPrompt">
+        <p>To install this app, click the "Add to Home Screen" option in your browser settings.</p>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/notification.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('serviceWorker.js');
+        }
+    </script>
+</body>
+</html>
