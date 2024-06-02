@@ -1,3 +1,19 @@
+// Request Notification Permission
+if ('Notification' in window && navigator.serviceWorker) {
+    Notification.requestPermission().then(permission => {
+        if (permission === 'granted') {
+            console.log('Notification permission granted.');
+            scheduleNotification();
+        } else {
+            console.log('Notification permission denied.');
+        }
+    }).catch(error => {
+        console.error('Notification permission request failed:', error);
+    });
+} else {
+    console.log('Notifications are not supported by this browser.');
+}
+
 document.getElementById('questionnaire').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -6,22 +22,6 @@ document.getElementById('questionnaire').addEventListener('submit', function(eve
 
     localStorage.setItem('questionnaireData', JSON.stringify(formData));
     alert('Your response has been saved!');
-
-    // Request Notification Permission
-    if ('Notification' in window && navigator.serviceWorker) {
-        Notification.requestPermission().then(permission => {
-            if (permission === 'granted') {
-                console.log('Notification permission granted.');
-                scheduleNotification();
-            } else {
-                console.log('Notification permission denied.');
-            }
-        }).catch(error => {
-            console.error('Notification permission request failed:', error);
-        });
-    } else {
-        console.log('Notifications are not supported by this browser.');
-    }
 });
 
 function scheduleNotification() {
