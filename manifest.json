@@ -1,6 +1,6 @@
 {
     "name": "AECOS Questionnaire",
-    "short_name": "AECOS",
+    "short_name": "AECOS Questionnaire",
     "start_url": "/AECOS/",
     "display": "standalone",
     "background_color": "#ffffff",
